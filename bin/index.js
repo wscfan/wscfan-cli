@@ -1,3 +1,3 @@
-#!/use/bin/env node
+#!/usr/bin/env node
 
 console.log('welcome imooc-test')
