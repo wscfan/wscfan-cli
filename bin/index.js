@@ -3,8 +3,10 @@
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 const args = hideBin(process.argv);
+const cli = yargs(args);
+const dedent = require("dedent");
 
-yargs(args)
+cli
   .usage("Usage: wscfan-cli [command] <options>")
   .demandCommand(
     1,
@@ -12,4 +14,8 @@ yargs(args)
   )
   .strict()
   .alias("h", "help")
-  .alias("v", "version").argv;
+  .alias("v", "version")
+  .wrap(cli.terminalWidth())
+  .epilogue(
+    dedent` for more information, see https://github.com/wscfan/wscfan-cli`
+  ).argv;
