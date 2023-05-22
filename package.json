@@ -12,6 +12,7 @@
   "author": "wscfan",
   "license": "ISC",
   "dependencies": {
-    "wscfan-cli-lib": "^1.0.0"
+    "wscfan-cli-lib": "^1.0.0",
+    "yargs": "^17.7.2"
   }
 }

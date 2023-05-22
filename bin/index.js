@@ -1,31 +1,15 @@
 #!/usr/bin/env node
 
-const lib = require("wscfan-cli-lib");
+const yargs = require("yargs/yargs");
+const { hideBin } = require("yargs/helpers");
+const args = hideBin(process.argv);
 
-// 注册一个命令 wscfan-cli init
-const argv = require("process").argv;
-const command = argv[2];
-
-const options = argv.slice(3);
-if (options.length > 1) {
-  let [option, param] = options;
-  option = option.replace("--", "");
-
-  if (command) {
-    if (lib[command]) {
-      lib[command]({ option, param });
-    } else {
-      console.log("请输入命令");
-    }
-  } else {
-    console.log("无效命令");
-  }
-}
-
-// 实现参数解析 --version 和 init --name
-if (command.startsWith("--") || command.startsWith("-")) {
-  const globalOption = command.replace(/--|-/g, "");
-  if (globalOption === "version" || globalOption === "V") {
-    console.log("1.0.3");
-  }
-}
+yargs(args)
+  .usage("Usage: wscfan-cli [command] <options>")
+  .demandCommand(
+    1,
+    "A command is required. Pass --help to see all available commands and options."
+  )
+  .strict()
+  .alias("h", "help")
+  .alias("v", "version").argv;
