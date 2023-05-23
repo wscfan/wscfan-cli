@@ -16,8 +16,7 @@
     "url": "https://github.com/wscfan/wscfan-cli.git"
   },
   "dependencies": {
-    "dedent": "^0.7.0",
-    "wscfan-cli-lib": "^1.0.0",
-    "yargs": "^17.7.2"
+    "commander": "^10.0.1",
+    "wscfan-cli-lib": "^1.0.0"
   }
 }

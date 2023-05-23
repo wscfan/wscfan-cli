@@ -1,51 +1,35 @@
 #!/usr/bin/env node
 
-const yargs = require("yargs/yargs");
-const { hideBin } = require("yargs/helpers");
-const args = hideBin(process.argv);
-const cli = yargs(args);
-const dedent = require("dedent");
+const commander = require("commander");
+const pkg = require("../package.json");
 
-cli
-  .usage("Usage: wscfan-cli [command] <options>")
-  .demandCommand(
-    1,
-    "A command is required. Pass --help to see all available commands and options."
-  )
-  .strict()
-  .alias("h", "help")
-  .alias("v", "version")
-  .wrap(cli.terminalWidth())
-  .epilogue(
-    dedent` for more information, see https://github.com/wscfan/wscfan-cli`
-  )
-  .options({
-    debug: {
-      type: "boolean",
-      describe: "Bootstrap debug mode",
-      alias: "d",
-    },
-  })
-  .option("registry", {
-    type: "boolean",
-    // hidden: true,
-    type: "string",
-    describe: "Define global registry",
-    alias: "r",
-  })
-  .group(["debug"], "Dev Options:")
-  .group(["registry"], "Extra Options")
-  .command(
-    "init [name]",
-    "Do init a project",
-    (yargs) => {
-      yargs.option("name", {
-        type: "string",
-        describe: "Name of a project",
-        alias: "n",
-      });
-    },
-    (argv) => {
-      console.log(argv);
-    }
-  ).argv;
+// 获取commander单例
+// const { program } = commander;
+
+const program = new commander.Command();
+program
+  .name(Object.keys(pkg.bin)[0])
+  .usage("<command> [options]")
+  .version(pkg.version)
+  .option("-d, --debug", "是否开启调试模式", false)
+  .option("-e, --envName <envName>", "获取环境变量名称");
+
+// command注册命令
+const clone = program.command("clone <source> [destination]");
+clone
+  .description("clone a repository")
+  .option("-f, --force", "是否强制克隆")
+  .action((source, destination, cmdObj) => {
+    console.log("do clone", source, "to", destination, cmdObj.force);
+  });
+
+program.parse(process.argv);
+
+// program.parse();
+
+// addCommand注册命令
+
+// console.log(program.getOptionValue("debug"));
+// console.log(program.getOptionValue("envName"))
+// program.outputHelp();
+// console.log(program.opts());
