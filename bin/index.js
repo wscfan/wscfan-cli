@@ -12,7 +12,11 @@ cli
     1,
     "A command is required. Pass --help to see all available commands and options."
   )
+  .fail((err) => {
+    console.log(err);
+  })
   .strict()
+  .recommendCommands()
   .alias("h", "help")
   .alias("v", "version")
   .wrap(cli.terminalWidth())
@@ -48,4 +52,13 @@ cli
     (argv) => {
       console.log(argv);
     }
-  ).argv;
+  )
+  .command({
+    command: "list",
+    aliases: ["ls", "la", "ll"],
+    describe: "List local packages",
+    builder: (yargs) => {},
+    handler: (argv) => {
+      console.log(argv);
+    },
+  }).argv;
