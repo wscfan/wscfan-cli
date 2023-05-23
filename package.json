@@ -1,7 +1,7 @@
 {
   "name": "wscfan-cli",
-  "version": "1.0.3",
-  "description": "",
+  "version": "1.0.4",
+  "description": "wscfan脚手架",
   "bin": {
     "wscfan-cli": "bin/index.js"
   },
@@ -11,6 +11,10 @@
   },
   "author": "wscfan",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wscfan/wscfan-cli.git"
+  },
   "dependencies": {
     "dedent": "^0.7.0",
     "wscfan-cli-lib": "^1.0.0",

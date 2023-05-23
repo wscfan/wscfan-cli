@@ -18,4 +18,34 @@ cli
   .wrap(cli.terminalWidth())
   .epilogue(
     dedent` for more information, see https://github.com/wscfan/wscfan-cli`
+  )
+  .options({
+    debug: {
+      type: "boolean",
+      describe: "Bootstrap debug mode",
+      alias: "d",
+    },
+  })
+  .option("registry", {
+    type: "boolean",
+    // hidden: true,
+    type: "string",
+    describe: "Define global registry",
+    alias: "r",
+  })
+  .group(["debug"], "Dev Options:")
+  .group(["registry"], "Extra Options")
+  .command(
+    "init [name]",
+    "Do init a project",
+    (yargs) => {
+      yargs.option("name", {
+        type: "string",
+        describe: "Name of a project",
+        alias: "n",
+      });
+    },
+    (argv) => {
+      console.log(argv);
+    }
   ).argv;
