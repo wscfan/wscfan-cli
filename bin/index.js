@@ -23,11 +23,33 @@ clone
     console.log("do clone", source, "to", destination, cmdObj.force);
   });
 
+// addCommand注册子命令
+const service = new commander.Command("service");
+service
+  .command("start [port]")
+  .description("start service at some port")
+  .action((port) => {
+    console.log("do service start", port);
+  });
+service
+  .command("stop")
+  .description("stop service")
+  .action(() => {
+    console.log("stop service");
+  });
+program.addCommand(service);
+
+program
+  .argument("<cmd> [options]")
+  .description("test command", {
+    cmd: "command to run",
+    options: "options for command"
+  })
+  .action((cmd, options) => {
+    console.log(cmd, options);
+  });
+
 program.parse(process.argv);
-
-// program.parse();
-
-// addCommand注册命令
 
 // console.log(program.getOptionValue("debug"));
 // console.log(program.getOptionValue("envName"))
