@@ -40,11 +40,16 @@ service
 program.addCommand(service);
 
 program
-  .argument("<cmd> [options]")
-  .description("test command", {
-    cmd: "command to run",
-    options: "options for command"
+  .command("install [name]", "install package", {
+    // executableFile: "wscfan-cli",
+    // isDefault: true,
+    // hidden: true
   })
+  .alias("i");
+
+program
+  .argument("<cmd>", "command to run")
+  .argument("[options]", "options for command")
   .action((cmd, options) => {
     console.log(cmd, options);
   });
